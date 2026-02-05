@@ -1,0 +1,74 @@
+services:
+  postgres:
+    image: postgres:15-alpine
+    container_name: postgres
+    environment:
+      POSTGRES_DB: pedidos_db
+      POSTGRES_USER: pedidos_user
+      POSTGRES_PASSWORD: pedidos_pass
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    ports:
+      - "5432:5432"
+    networks:
+      - backend
+
+  pedidos-service:
+    build: ./services/pedidos-service
+    container_name: pedidos-service
+    environment:
+      DB_HOST: postgres
+      DB_PORT: 5432
+      DB_NAME: pedidos_db
+      DB_USER: pedidos_user
+      DB_PASSWORD: pedidos_pass
+      SERVICE_NAME: pedidos
+    depends_on:
+      - postgres
+    ports:
+      - "3001:3000"
+    networks:
+      - backend
+
+  pagamentos-service:
+    build: ./services/pagamentos-service
+    container_name: pagamentos-service
+    environment:
+      SERVICE_NAME: pagamentos
+    ports:
+      - "3002:3000"
+    networks:
+      - backend
+
+  estoque-service:
+    build: ./services/estoque-service
+    container_name: estoque-service
+    environment:
+      SERVICE_NAME: estoque
+    ports:
+      - "3003:3000"
+    networks:
+      - backend
+
+  api-gateway:
+    build: ./services/api-gateway
+    container_name: api-gateway
+    environment:
+      PEDIDOS_URL: http://pedidos-service:3000
+      PAGAMENTOS_URL: http://pagamentos-service:3000
+      ESTOQUE_URL: http://estoque-service:3000
+    depends_on:
+      - pedidos-service
+      - pagamentos-service
+      - estoque-service
+    ports:
+      - "3000:3000"
+    networks:
+      - backend
+
+networks:
+  backend:
+    driver: bridge
+
+volumes:
+  postgres_data:
