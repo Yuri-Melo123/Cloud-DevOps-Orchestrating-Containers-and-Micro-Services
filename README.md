@@ -2,7 +2,7 @@
 
 # Visão Geral
 
-Este projeto apresenta uma proposta completa de Cloud DevOps para a aplicação fictícia Pedidos Veloz, um e-commerce baseado em microsserviços, com foco em automação, escalabilidade, confiabilidade e observabilidade.
+Este projeto apresenta uma proposta completa de Cloud DevOps para a aplicação fictícia da Pedidos Veloz, um e-commerce baseado em microsserviços com foco em automação, escalabilidade, confiabilidade e observabilidade.
 
 A solução cobre todo o ciclo do desenvolvimento local à produção, utilizando Docker, Kubernetes, CI/CD, observabilidade e Infraestrutura como Código.
 
@@ -83,5 +83,6 @@ Tracing: proposto com OpenTelemetry
 Essa abordagem permite diagnóstico rápido e maior confiabilidade operacional.
 
 # Infraestrutura como Código
+
 
 A infraestrutura Kubernetes é definida de forma declarativa com Terraform, permitindo reprodutibilidade, versionamento e integração com pipelines CI/CD.
