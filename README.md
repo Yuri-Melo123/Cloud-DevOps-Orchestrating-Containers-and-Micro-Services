@@ -86,3 +86,11 @@ Essa abordagem permite diagnóstico rápido e maior confiabilidade operacional.
 
 
 A infraestrutura Kubernetes é definida de forma declarativa com Terraform, permitindo reprodutibilidade, versionamento e integração com pipelines CI/CD.
+
+
+# Link para a explicação no Youtube
+
+https://youtu.be/sLtNy7j0Ubw
+
+
+Desenvolvido por Yuri de Oliveira Melo
